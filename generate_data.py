@@ -5,6 +5,7 @@ import hashlib
 
 from datetime import timedelta
 
+import swarmpal.toolboxes
 from swarmpal.io import create_paldata, PalDataItem
 
 def str_to_timedelta(time):
@@ -33,6 +34,7 @@ def main(args):
                 for time in dataset['params']['pad_times']
             ]
 
+        # Download the data
         if provider == 'vires':
             options = dict(asynchronous=False, show_progress=False)
             data = create_paldata(PalDataItem.from_vires(options=options, **dataset['params']))
@@ -42,14 +44,20 @@ def main(args):
         else:
             print(f'Unknown provider {provider}')
             continue
+        
+        # Apply toolboxes
+        for toolbox_name, toolbox_config in dataset.get('toolboxes', {}).items():
+            process = swarmpal.toolboxes.make_toolbox(toolbox_name, config=toolbox_config)
+            data = process(data)
 
+        # Save the results as a NetCDF file
         filename = f'{name}.nc4'
         filepath = args.data_dir / filename
 
         data.to_netcdf(filepath)
         registry[filename] = calc_md5sum(filepath)
 
-    with open(args.data_dir / args.registry, 'w') as f:
+    with open(args.registry, 'w') as f:
         for filename, md5sum in registry.items():
             f.write(f'{filename} md5:{md5sum}\n')
 

@@ -9,6 +9,13 @@ test_fac_singlesat_swarm:
     start_time: "2016-01-01T00:00:00"
     end_time: "2016-01-01T00:30:00"
     server_url: "https://vires.services/ows"
+  toolboxes:
+    FAC_single_sat:
+      dataset: SW_OPER_MAGA_LR_1B
+      model_varname: B_NEC_CHAOS
+      measurement_varname: B_NEC
+      inclination_limit: 30
+      time_jump_limit: 6
 
 # Datasets for tests/io/test_paldata.py
 test_paldataitem_vires:

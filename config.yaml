@@ -11,7 +11,7 @@ test_fac_singlesat_swarm:
       end_time: "2016-01-01T00:30:00"
       server_url: "https://vires.services/ows"
   processes:
-    - name: FAC_single_sat
+    - process_name: FAC_single_sat
       config:
         dataset: SW_OPER_MAGA_LR_1B
         model_varname: B_NEC_CHAOS
@@ -20,62 +20,67 @@ test_fac_singlesat_swarm:
         time_jump_limit: 6
 
 # Datasets for tests/io/test_paldata.py
-#test_paldataitem_vires:
-#  provider: vires
-#  params:
-#    collection: "SW_OPER_MAGA_LR_1B"
-#    measurements: ["F", "B_NEC"]
-#    start_time: "2016-01-01T00:00:00"
-#    end_time: "2016-01-01T00:00:10"
-#    models: ["IGRF"]
-#    filters: ["(Longitude > 92.8) AND (Latitude < -72.57)"]
-#
-#test_paldataitem_hapi:
-#  provider: hapi
-#  params:
-#    dataset: "SW_OPER_MAGA_LR_1B"
-#    parameters: "F,B_NEC"
-#    start: "2016-01-01T00:00:00"
-#    stop: "2016-01-01T00:00:10"
-#    server: "https://vires.services/hapi"
-#
-#test_time_pad_vires:
-#  provider: vires
-#  params:
-#    collection: "SW_OPER_MAGA_LR_1B"
-#    measurements: ["F", "B_NEC"]
-#    start_time: "2016-01-01T00:00:00"
-#    end_time: "2016-01-01T00:00:10"
-#    pad_times: ["0:00:03", "0:00:05"]
-#    server_url: "https://vires.services/ows"
-#
-#test_time_pad_hapi:
-#  provider: hapi
-#  params:
-#    dataset: "SW_OPER_MAGA_LR_1B"
-#    parameters: "F,B_NEC"
-#    start: "2016-01-01T00:00:00"
-#    stop: "2016-01-01T00:00:10"
-#    pad_times: ["0:00:03", "0:00:05"]
-#    server: "https://vires.services/hapi"
-#
-#fixture_paldata_item_MAGA:
-#  provider: vires
-#  params:
-#    collection: "SW_OPER_MAGA_LR_1B"
-#    measurements: ["B_NEC"]
-#    models: ["IGRF"]
-#    start_time: "2016-01-01T00:00:00"
-#    end_time: "2016-01-01T00:01:00"
-#    server_url: "https://vires.services/ows"
-#
-#
-#fixture_paldata_item_MAGB:
-#  provider: vires
-#  params:
-#    collection: "SW_OPER_MAGB_LR_1B"
-#    measurements: ["B_NEC"]
-#    models: ["IGRF"]
-#    start_time: "2016-01-01T00:00:00"
-#    end_time: "2016-01-01T00:01:00"
-#    server_url: "https://vires.services/ows"
+test_paldataitem_vires:
+  data:
+    provider: vires
+    config:
+      collection: "SW_OPER_MAGA_LR_1B"
+      measurements: ["F", "B_NEC"]
+      start_time: "2016-01-01T00:00:00"
+      end_time: "2016-01-01T00:00:10"
+      models: ["IGRF"]
+      filters: ["(Longitude > 92.8) AND (Latitude < -72.57)"]
+
+test_paldataitem_hapi:
+  data:
+    provider: hapi
+    config:
+      dataset: "SW_OPER_MAGA_LR_1B"
+      parameters: "F,B_NEC"
+      start: "2016-01-01T00:00:00"
+      stop: "2016-01-01T00:00:10"
+      server: "https://vires.services/hapi"
+
+test_time_pad_vires:
+  data:
+    provider: vires
+    config:
+      collection: "SW_OPER_MAGA_LR_1B"
+      measurements: ["F", "B_NEC"]
+      start_time: "2016-01-01T00:00:00"
+      end_time: "2016-01-01T00:00:10"
+      pad_times: ["0:00:03", "0:00:05"]
+      server_url: "https://vires.services/ows"
+
+test_time_pad_hapi:
+  data:
+    provider: hapi
+    config:
+      dataset: "SW_OPER_MAGA_LR_1B"
+      parameters: "F,B_NEC"
+      start: "2016-01-01T00:00:00"
+      stop: "2016-01-01T00:00:10"
+      pad_times: ["0:00:03", "0:00:05"]
+      server: "https://vires.services/hapi"
+
+fixture_paldata_item_MAGA:
+  data:
+    provider: vires
+    config:
+      collection: "SW_OPER_MAGA_LR_1B"
+      measurements: ["B_NEC"]
+      models: ["IGRF"]
+      start_time: "2016-01-01T00:00:00"
+      end_time: "2016-01-01T00:01:00"
+      server_url: "https://vires.services/ows"
+
+fixture_paldata_item_MAGB:
+  data:
+    provider: vires
+    config:
+      collection: "SW_OPER_MAGB_LR_1B"
+      measurements: ["B_NEC"]
+      models: ["IGRF"]
+      start_time: "2016-01-01T00:00:00"
+      end_time: "2016-01-01T00:01:00"
+      server_url: "https://vires.services/ows"

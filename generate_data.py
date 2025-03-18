@@ -5,13 +5,8 @@ import hashlib
 
 from datetime import timedelta
 
-import swarmpal.toolboxes
-from swarmpal.io import create_paldata, PalDataItem
-
-def str_to_timedelta(time):
-    '''Convert strings that match 'HH:MM:SS' to datetime.timedelta ojbects.'''
-    hours, minutes, seconds = (int(part) for part in time.split(":"))
-    return timedelta(hours=hours, minutes=minutes, seconds=seconds)
+import swarmpal
+from swarmpal.io import create_paldata
 
 def calc_md5sum(filename):
     '''Calculate the md5sum of the content of a file'''
@@ -24,33 +19,16 @@ def main(args):
     
     registry = {}
     for name, dataset in datasets.items():
-        data_spec = dataset['data']
-        provider, config = data_spec['provider'], data_spec['config']
-        print(f"Downloading '{name}' from {provider}")
+        print(name)
+        print(f"  Downloading from {dataset['data']['provider']}")
 
-        # Convert pad_times from strings to timedelta objects
-        if 'pad_times' in config:
-            config['pad_times'] = [
-                str_to_timedelta(time)
-                for time in config['pad_times']
-            ]
+        data = swarmpal.get_data(**dataset['data'])
+        data = create_paldata(data) # TODO should create_paldata go in get_data?
 
-        # Download the data
-        if provider == 'vires':
-            options = dict(asynchronous=False, show_progress=False)
-            data = create_paldata(PalDataItem.from_vires(options=options, **config))
-        elif provider == 'hapi':
-            options = dict(logging=False)
-            data = create_paldata(PalDataItem.from_hapi(options=options, **config))
-        else:
-            print(f'Unknown provider {provider}')
-            continue
-        
         # Apply processes
-        for process in dataset.get('processes', []):
-            #for process_name, process_config in dataset.get('processes', {}).items():
-            process_name, process_config = process['name'], process['config']
-            process = swarmpal.toolboxes.make_toolbox(process_name, config=process_config)
+        for process_spec in dataset.get('processes', []):
+            print(f"  Applying {process_spec['process_name']}")
+            process = swarmpal.make_process(**process_spec)
             data = process(data)
 
         # Save the results as a NetCDF file

@@ -24,30 +24,33 @@ def main(args):
     
     registry = {}
     for name, dataset in datasets.items():
-        provider = dataset.get('provider', 'none')
+        data_spec = dataset['data']
+        provider, config = data_spec['provider'], data_spec['config']
         print(f"Downloading '{name}' from {provider}")
 
         # Convert pad_times from strings to timedelta objects
-        if 'pad_times' in dataset['params']:
-            dataset['params']['pad_times'] = [
+        if 'pad_times' in config:
+            config['pad_times'] = [
                 str_to_timedelta(time)
-                for time in dataset['params']['pad_times']
+                for time in config['pad_times']
             ]
 
         # Download the data
         if provider == 'vires':
             options = dict(asynchronous=False, show_progress=False)
-            data = create_paldata(PalDataItem.from_vires(options=options, **dataset['params']))
+            data = create_paldata(PalDataItem.from_vires(options=options, **config))
         elif provider == 'hapi':
             options = dict(logging=False)
-            data = create_paldata(PalDataItem.from_hapi(options=options, **dataset['params']))
+            data = create_paldata(PalDataItem.from_hapi(options=options, **config))
         else:
             print(f'Unknown provider {provider}')
             continue
         
-        # Apply toolboxes
-        for toolbox_name, toolbox_config in dataset.get('toolboxes', {}).items():
-            process = swarmpal.toolboxes.make_toolbox(toolbox_name, config=toolbox_config)
+        # Apply processes
+        for process in dataset.get('processes', []):
+            #for process_name, process_config in dataset.get('processes', {}).items():
+            process_name, process_config = process['name'], process['config']
+            process = swarmpal.toolboxes.make_toolbox(process_name, config=process_config)
             data = process(data)
 
         # Save the results as a NetCDF file

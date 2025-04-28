@@ -1,0 +1,9 @@
+---
+data_params:
+  - provider: vires
+    collection: "SW_OPER_MAGA_LR_1B"
+    measurements: ["F", "B_NEC"]
+    start_time: "2016-01-01T00:00:00"
+    end_time: "2016-01-01T00:00:10"
+    pad_times: ["0:00:03", "0:00:05"]
+    server_url: "https://vires.services/ows"

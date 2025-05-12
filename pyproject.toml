@@ -11,4 +11,5 @@ dependencies = [
 ]
 
 [tool.uv.sources]
-swarmpal = { git = "https://github.com/dawiedotcom/SwarmPAL", branch = "simple_api" }
+#swarmpal = { git = "https://github.com/dawiedotcom/SwarmPAL", branch = "simple_api" }
+swarmpal = { path = "../SwarmPAL", editable = true }

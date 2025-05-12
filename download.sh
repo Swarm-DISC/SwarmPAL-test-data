@@ -9,3 +9,4 @@ ls -1 ${YAML_DIR} | sed -r 's/\.yaml//' | xargs -I {} swarmpal batch ${YAML_DIR}
 
 # Update the registry
 md5sum ${DATA_DIR}/*.nc4 | sed -r "s/([a-z0-9]+)\ \ (.*)/\2 md5:\1/" > registry.txt
+md5sum ${YAML_DIR}/*.yaml | sed -r "s/([a-z0-9]+)\ \ (.*)/\2 md5:\1/" >> registry.txt

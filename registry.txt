@@ -4,6 +4,7 @@ data/test_dsecs_basic.nc4 md5:b786bce3d02baad74d6ef8193713bebe
 data/test_fac_singlesat_swarm.nc4 md5:2cf7223abbd60bc315c41f4385983976
 data/test_paldataitem_hapi.nc4 md5:ebcdf7d10ba48dc4ada27cd8469702fd
 data/test_paldataitem_vires.nc4 md5:6dfe40d75858e5a9be7673a84faf362e
+data/test_tfa_basic.nc4 md5:168e508bffd5ca45d863d85ffa40be4e
 data/test_time_pad_hapi.nc4 md5:1b1b87101662245fbcc336ab21a195f5
 data/test_time_pad_vires.nc4 md5:ef0408a5db183bc7b5c78cb86f32d787
 config/fixture_paldata_item_MAGA.yaml md5:8931cdad2f7fb78b4ee2a77252d9b459
@@ -12,4 +13,5 @@ config/test_dsecs_basic.yaml md5:3bc1c2c900eb186f3657f9ce1fe12234
 config/test_fac_singlesat_swarm.yaml md5:09840fb31cd5b1c5e24ef97cd5b10115
 config/test_paldataitem_hapi.yaml md5:f8c9ef49b3e8a060163056bcae0bf50d
 config/test_paldataitem_vires.yaml md5:66b14393d8b94cd49bfb75504fb4cbb7
+config/test_tfa_basic.yaml md5:5c54e2ddfee9e71941e358cf44d6bf35
 config/test_time_pad_vires.yaml md5:53dbb0e4d0ddebe53d935b19e4003ada

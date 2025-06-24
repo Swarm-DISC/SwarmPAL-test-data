@@ -33,6 +33,7 @@ The following has to be done when a new dataset is needed for unit tests in Swar
     ```bash
     ./download.sh config/<dataset>.yaml
     ```
+    Keep note of the new hash value of `registry.txt` printed when the script finishes.
   * Add the new `.yaml`, `.nc4` and updated `registry.txt` files to this git repository's `main` branch
     and push the changes to GitHub.
   * While developing unit tests, it is useful to have Pooch download datasets from the `main` branch of this repository.
@@ -40,6 +41,7 @@ The following has to be done when a new dataset is needed for unit tests in Swar
     `SWARMPAL_TEST_DATA_VERSION` to [PEP440 local version](https://peps.python.org/pep-0440/#local-version-identifiers)
     by adding a `+dev` to the end of the string.
     For example, if the current value of `SWARMPAL_TEST_DATA_VERSION` is `vA.B.C` change it to `vA.B.C+dev`.
+  * Update the hash of `registry.txt` in [SwarmPAL repository](https://github.com/Swarm-DISC/SwarmPAL/tree/main/tests/test_data.py).
   * Add unit tests to SwarmPAL using the new dataset.
   * If you are happy with the new tests, create a tag in this repository and push it to GitHub:
     ```bash
